@@ -203,6 +203,8 @@ public final class Skript extends JavaPlugin implements Listener {
 	private SkriptUpdater updater;
 	
 	public Skript() throws IllegalStateException {
+		if (!Bukkit.getName().equals("SkAnalyzer"))
+			throw new RuntimeException("MockSkript only supports SkAnalyzer.");
 		if (instance != null)
 			throw new IllegalStateException("Cannot create multiple instances of Skript!");
 		instance = this;
@@ -364,9 +366,11 @@ public final class Skript extends JavaPlugin implements Listener {
 	 * @return The folder containing all Scripts.
 	 */
 	public File getScriptsFolder() {
+		/*
 		if (!scriptsFolder.isDirectory())
 			//noinspection ResultOfMethodCallIgnored
 			scriptsFolder.mkdirs();
+		 */
 		return scriptsFolder;
 	}
 	
@@ -398,22 +402,26 @@ public final class Skript extends JavaPlugin implements Listener {
 		File config = new File(getDataFolder(), "config.sk");
 		File features = new File(getDataFolder(), "features.sk");
 		File lang = new File(getDataFolder(), "lang");
-		if (!scriptsFolder.isDirectory() || !config.exists() || !features.exists() || !lang.exists()) {
+		if (/*!scriptsFolder.isDirectory() ||*/ !config.exists() || !features.exists() /*|| !lang.exists()*/) {
 			ZipFile f = null;
 			try {
 				boolean populateExamples = false;
+				/*
 				if (!scriptsFolder.isDirectory()) {
 					if (!scriptsFolder.mkdirs())
 						throw new IOException("Could not create the directory " + scriptsFolder);
 					populateExamples = true;
 				}
+				 */
 
 				boolean populateLanguageFiles = false;
+				/*
 				if (!lang.isDirectory()) {
 					if (!lang.mkdirs())
 						throw new IOException("Could not create the directory " + lang);
 					populateLanguageFiles = true;
 				}
+				 */
 
 				f = new ZipFile(getFile());
 				for (ZipEntry e : new EnumerationIterable<ZipEntry>(f.entries())) {
@@ -559,6 +567,7 @@ public final class Skript extends JavaPlugin implements Listener {
 				assert Bukkit.getWorlds().get(0).getFullTime() == tick;
 				
 				// Load hooks from Skript jar
+				/*
 				try {
 					try (JarFile jar = new JarFile(getFile())) {
 						for (JarEntry e : new EnumerationIterable<>(jar.entries())) {
@@ -584,6 +593,7 @@ public final class Skript extends JavaPlugin implements Listener {
 					error("Error while loading plugin hooks" + (e.getLocalizedMessage() == null ? "" : ": " + e.getLocalizedMessage()));
 					Skript.exception(e);
 				}
+				 */
 				finishedLoadingHooks = true;
 				
 				if (TestMode.ENABLED) {
@@ -600,6 +610,7 @@ public final class Skript extends JavaPlugin implements Listener {
 				stopAcceptingRegistrations();
 				
 				
+				/*
 				Documentation.generate(); // TODO move to test classes?
 
 				// Variable loading
@@ -804,6 +815,7 @@ public final class Skript extends JavaPlugin implements Listener {
 				/*
 				 * Start loading scripts
 				 */
+				/*
 				Date start = new Date();
 				CountingLogHandler logHandler = new CountingLogHandler(Level.SEVERE);
 
@@ -852,6 +864,7 @@ public final class Skript extends JavaPlugin implements Listener {
 						}
 					});
 				
+				 */
 			}
 		});
 		

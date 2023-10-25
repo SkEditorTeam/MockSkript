@@ -457,6 +457,10 @@ public class ScriptLoader {
 		return loadScripts(loadStructures(file), openCloseable);
 	}
 
+	public static CompletableFuture<ScriptInfo> loadScripts(File file, OpenCloseable openCloseable, boolean structuresPostLoad) {
+		return loadScripts(loadStructures(file), openCloseable, structuresPostLoad);
+	}
+
 	/**
 	 * Loads the Scripts present at the files using {@link #loadScripts(List, OpenCloseable)},
 	 * 	sending info/error messages when done.
@@ -483,6 +487,10 @@ public class ScriptLoader {
 	 * @return Info on the loaded scripts.
 	 */
 	private static CompletableFuture<ScriptInfo> loadScripts(List<Config> configs, OpenCloseable openCloseable) {
+		return loadScripts(configs, openCloseable, true);
+	}
+
+	private static CompletableFuture<ScriptInfo> loadScripts(List<Config> configs, OpenCloseable openCloseable, boolean structuresPostLoad) {
 		if (configs.isEmpty()) // Nothing to load
 			return CompletableFuture.completedFuture(new ScriptInfo());
 
@@ -586,7 +594,7 @@ public class ScriptLoader {
 						parser.setNode(structure.getEntryContainer().getSource());
 
 						try {
-							if (!structure.postLoad()) {
+							if ((structuresPostLoad || structure instanceof ch.njol.skript.structures.StructFunction) && !structure.postLoad()) {
 								pair.getFirst().getSecond().remove(structure);
 								return true;
 							}
@@ -767,9 +775,11 @@ public class ScriptLoader {
 		}
 		
 		try {
+			/*
 			String name = Skript.getInstance().getDataFolder().toPath().toAbsolutePath()
 					.resolve(Skript.SCRIPTSFOLDER).relativize(file.toPath().toAbsolutePath()).toString();
-			return loadStructure(Files.newInputStream(file.toPath()), name);
+			 */
+			return loadStructure(Files.newInputStream(file.toPath()), file.getCanonicalPath());
 		} catch (IOException e) {
 			Skript.error("Could not load " + file.getName() + ": " + ExceptionUtils.toString(e));
 		}
@@ -827,7 +837,10 @@ public class ScriptLoader {
 		for (Script script : scripts) {
 			parser.setActive(script);
 			for (Structure structure : script.getStructures())
-				structure.unload();
+				try {
+					structure.unload();
+				} catch (Throwable ignored) {
+				}
 		}
 
 		parser.setInactive();

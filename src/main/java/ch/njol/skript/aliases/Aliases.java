@@ -399,6 +399,7 @@ public abstract class Aliases {
 			return;
 		for (Material material : Material.values()) {
 			if (!provider.hasAliasForMaterial(material)) {
+				if (material.isLegacy()) return;
 				NamespacedKey key = material.getKey();
 				String name = key.getKey().replace("_", " ");
 				parser.loadAlias(name + "¦s", key.toString());
