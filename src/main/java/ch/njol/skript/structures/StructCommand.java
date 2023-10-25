@@ -151,7 +151,7 @@ public class StructCommand extends Structure {
 	private EntryContainer entryContainer;
 
 	@Nullable
-	private ScriptCommand scriptCommand;
+	public ScriptCommand scriptCommand;
 
 	@Override
 	public boolean init(Literal<?>[] args, int matchedPattern, ParseResult parseResult, @Nullable EntryContainer entryContainer) {

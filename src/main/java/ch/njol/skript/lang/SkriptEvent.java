@@ -53,14 +53,14 @@ public abstract class SkriptEvent extends Structure {
 
 	public static final Priority PRIORITY = new Priority(600);
 
-	private String expr;
+	public String expr;
 	private SectionNode source;
 	@Nullable
 	protected EventPriority eventPriority;
 	@Nullable
 	protected ListeningBehavior listeningBehavior;
 	protected boolean supportsListeningBehavior;
-	private SkriptEventInfo<?> skriptEventInfo;
+	public SkriptEventInfo<?> skriptEventInfo;
 
 	/**
 	 * The Trigger containing this SkriptEvent's code.

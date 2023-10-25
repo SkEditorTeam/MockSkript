@@ -91,9 +91,9 @@ public class ScriptCommand implements TabExecutor {
 	private final String label;
 	private final List<String> aliases;
 	private List<String> activeAliases;
-	private String permission;
+	public String permission;
 	private final VariableString permissionMessage;
-	private final String description;
+	public final String description;
 	private final String prefix;
 	@Nullable
 	private final Timespan cooldown;
@@ -101,7 +101,7 @@ public class ScriptCommand implements TabExecutor {
 	private final String cooldownBypass;
 	@Nullable
 	private final Expression<String> cooldownStorage;
-	final CommandUsage usage;
+	public final CommandUsage usage;
 
 	private final Trigger trigger;
 
@@ -342,7 +342,7 @@ public class ScriptCommand implements TabExecutor {
 			Skript.info("# /" + name + " " + rest);
 		final long startTrigger = System.nanoTime();
 
-		if (!trigger.execute(event))
+		if (!trigger.forceExecute(event))
 			sender.sendMessage(Commands.m_internal_error.toString());
 
 		if (Skript.log(Verbosity.VERY_HIGH))

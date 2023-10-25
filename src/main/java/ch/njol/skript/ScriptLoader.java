@@ -789,8 +789,11 @@ public class ScriptLoader {
 		}
 		
 		try {
+			/*
 			String name = Skript.getInstance().getDataFolder().toPath().toAbsolutePath()
 					.resolve(Skript.SCRIPTSFOLDER).relativize(file.toPath().toAbsolutePath()).toString();
+			 */
+			String name = file.getCanonicalPath();
 			return loadStructure(Files.newInputStream(file.toPath()), name);
 		} catch (IOException e) {
 			Skript.error("Could not load " + file.getName() + ": " + ExceptionUtils.toString(e));
@@ -849,7 +852,10 @@ public class ScriptLoader {
 		for (Script script : scripts) {
 			parser.setActive(script);
 			for (Structure structure : script.getStructures())
+				try {
 				structure.unload();
+				} catch (Throwable ignored) {
+				}
 		}
 
 		parser.setInactive();
