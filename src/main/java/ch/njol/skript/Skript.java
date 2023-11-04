@@ -399,6 +399,7 @@ public final class Skript extends JavaPlugin implements Listener {
 			getDataFolder().mkdirs();
 
 		scriptsFolder = new File(getDataFolder(), SCRIPTSFOLDER);
+		scriptsFolder.mkdirs();
 		File config = new File(getDataFolder(), "config.sk");
 		File features = new File(getDataFolder(), "features.sk");
 		File lang = new File(getDataFolder(), "lang");
