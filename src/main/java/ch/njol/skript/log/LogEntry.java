@@ -181,9 +181,7 @@ public class LogEntry {
 		errorInfo.addProperty("message", ChatColor.stripColor(message));
 		errorInfo.addProperty("level", level.getName());
 
-		com.google.gson.JsonObject jsonObject = new com.google.gson.JsonObject();
-		jsonObject.add(node.getConfig().getFileName().replace('\\', '/'), errorInfo);
-		return jsonObject.toString();
+		return errorInfo.toString();
 	}
 
 	private String replaceNewline(String s) {
