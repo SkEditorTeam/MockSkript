@@ -725,6 +725,7 @@ public final class Skript extends JavaPlugin implements Listener {
 										 * Usage of @After is pointless if the JUnit class requires delay. As the @After will happen instantly.
 										 * The JUnit must override the 'cleanup' method to avoid Skript automatically cleaning up the test data.
 										 */
+				/**
 										boolean overrides = false;
 										for (Method method : clazz.getDeclaredMethods()) {
 											if (!method.isAnnotationPresent(After.class))
