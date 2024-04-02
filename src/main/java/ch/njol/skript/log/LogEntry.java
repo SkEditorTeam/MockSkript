@@ -163,7 +163,7 @@ public class LogEntry {
 
 		if (node == null)
 			return String.format(detailsMsg.replaceAll("^\\s+", ""), message); // Remove line beginning spaces
-		/*
+
 		Config c = node.getConfig();
 		String from = this.from;
 
@@ -174,14 +174,6 @@ public class LogEntry {
 			String.format(lineInfoMsg, String.valueOf(node.getLine()), c.getFileName()) + // String.valueOf is to convert the line number (int) to a String
 			String.format(detailsMsg, message.replaceAll("§", "&")) + from +
 			String.format(lineDetailsMsg, node.save().trim().replaceAll("§", "&"));
-		 */
-		com.google.gson.JsonObject errorInfo = new com.google.gson.JsonObject();
-		errorInfo.addProperty("line", node.getLine());
-		//noinspection deprecation
-		errorInfo.addProperty("message", ChatColor.stripColor(message));
-		errorInfo.addProperty("level", level.getName());
-
-		return errorInfo.toString();
 	}
 
 	private String replaceNewline(String s) {
