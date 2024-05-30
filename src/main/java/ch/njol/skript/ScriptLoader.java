@@ -469,11 +469,15 @@ public class ScriptLoader {
 	 *                         each individual script load (see {@link #makeFuture(Supplier, OpenCloseable)}).
 	 */
 	public static CompletableFuture<ScriptInfo> loadScripts(Set<File> files, OpenCloseable openCloseable) {
+		return loadScripts(files, openCloseable, true);
+	}
+
+	public static CompletableFuture<ScriptInfo> loadScripts(Set<File> files, OpenCloseable openCloseable, boolean structuresPostLoad) {
 		return loadScripts(files.stream()
 			.sorted()
 			.map(ScriptLoader::loadStructures)
 			.flatMap(List::stream)
-			.collect(Collectors.toList()), openCloseable);
+			.collect(Collectors.toList()), openCloseable, structuresPostLoad);
 	}
 	
 	/**
