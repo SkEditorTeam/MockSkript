@@ -51,10 +51,10 @@ public abstract class SkriptEvent extends Structure {
 
 	public static final Priority PRIORITY = new Priority(600);
 
-	private String expr;
+	public String expr;
 	@Nullable
 	protected EventPriority eventPriority;
-	private SkriptEventInfo<?> skriptEventInfo;
+	public SkriptEventInfo<?> skriptEventInfo;
 
 	/**
 	 * The Trigger containing this SkriptEvent's code.

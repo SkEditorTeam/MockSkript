@@ -91,9 +91,9 @@ public class ScriptCommand implements TabExecutor {
 	private final String label;
 	private final List<String> aliases;
 	private List<String> activeAliases;
-	private String permission;
+	public String permission;
 	private final VariableString permissionMessage;
-	private final String description;
+	public final String description;
 	private final String prefix;
 	@Nullable
 	private final Timespan cooldown;
@@ -101,7 +101,7 @@ public class ScriptCommand implements TabExecutor {
 	private final String cooldownBypass;
 	@Nullable
 	private final Expression<String> cooldownStorage;
-	final String usage;
+	public final String usage;
 
 	private final Trigger trigger;
 

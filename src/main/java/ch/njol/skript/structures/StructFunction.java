@@ -71,7 +71,7 @@ public class StructFunction extends Structure {
 	}
 
 	@Nullable
-	private Signature<?> signature;
+	public Signature<?> signature;
 	private boolean local;
 
 	@Override

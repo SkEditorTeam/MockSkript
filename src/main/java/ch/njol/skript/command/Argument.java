@@ -49,7 +49,7 @@ public class Argument<T> {
 	@Nullable
 	private final Expression<? extends T> def;
 	
-	private final ClassInfo<T> type;
+	public final ClassInfo<T> type;
 	private final boolean single;
 	
 	private final int index;
