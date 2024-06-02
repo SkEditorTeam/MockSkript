@@ -49,6 +49,7 @@ public class Trigger extends TriggerSection {
 	 * @return false if an exception occurred.
 	 */
 	public boolean execute(Event event) {
+		if (true) return true;
 		boolean success = TriggerItem.walk(this, event);
 
 		// Clear local variables

@@ -457,10 +457,6 @@ public class ScriptLoader {
 		return loadScripts(loadStructures(file), openCloseable);
 	}
 
-	public static CompletableFuture<ScriptInfo> loadScripts(File file, OpenCloseable openCloseable, boolean structuresPostLoad) {
-		return loadScripts(loadStructures(file), openCloseable, structuresPostLoad);
-	}
-
 	/**
 	 * Loads the Scripts present at the files using {@link #loadScripts(List, OpenCloseable)},
 	 * 	sending info/error messages when done.
@@ -469,17 +465,13 @@ public class ScriptLoader {
 	 *                         each individual script load (see {@link #makeFuture(Supplier, OpenCloseable)}).
 	 */
 	public static CompletableFuture<ScriptInfo> loadScripts(Set<File> files, OpenCloseable openCloseable) {
-		return loadScripts(files, openCloseable, true);
-	}
-
-	public static CompletableFuture<ScriptInfo> loadScripts(Set<File> files, OpenCloseable openCloseable, boolean structuresPostLoad) {
 		return loadScripts(files.stream()
 			.sorted()
 			.map(ScriptLoader::loadStructures)
 			.flatMap(List::stream)
-			.collect(Collectors.toList()), openCloseable, structuresPostLoad);
+			.collect(Collectors.toList()), openCloseable);
 	}
-	
+
 	/**
 	 * Loads the specified scripts.
 	 *
