@@ -483,10 +483,6 @@ public class ScriptLoader {
 	 * @return Info on the loaded scripts.
 	 */
 	private static CompletableFuture<ScriptInfo> loadScripts(List<Config> configs, OpenCloseable openCloseable) {
-		return loadScripts(configs, openCloseable, true);
-	}
-
-	private static CompletableFuture<ScriptInfo> loadScripts(List<Config> configs, OpenCloseable openCloseable, boolean structuresPostLoad) {
 		if (configs.isEmpty()) // Nothing to load
 			return CompletableFuture.completedFuture(new ScriptInfo());
 
@@ -590,7 +586,7 @@ public class ScriptLoader {
 						parser.setNode(structure.getEntryContainer().getSource());
 
 						try {
-							if ((structuresPostLoad || structure instanceof ch.njol.skript.structures.StructFunction) && !structure.postLoad()) {
+							if (!structure.postLoad()) {
 								pair.getFirst().getSecond().remove(structure);
 								return true;
 							}
