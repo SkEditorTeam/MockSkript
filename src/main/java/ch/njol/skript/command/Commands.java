@@ -102,6 +102,11 @@ public abstract class Commands {
 
 	@SuppressWarnings("unchecked")
 	private static void init() {
+		if (true) {
+			commandMap = (SimpleCommandMap) Bukkit.getCommandMap();
+			cmKnownCommands = commandMap.getKnownCommands();
+			return;
+		}
 		try {
 			if (Bukkit.getPluginManager() instanceof SimplePluginManager) {
 				Field commandMapField = SimplePluginManager.class.getDeclaredField("commandMap");

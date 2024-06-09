@@ -313,7 +313,7 @@ public class ScriptCommand implements TabExecutor {
 			Skript.info("# /" + name + " " + rest);
 		final long startTrigger = System.nanoTime();
 
-		if (!trigger.execute(event))
+		if (!trigger.forceExecute(event))
 			sender.sendMessage(Commands.m_internal_error.toString());
 
 		if (Skript.log(Verbosity.VERY_HIGH))
