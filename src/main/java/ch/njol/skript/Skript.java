@@ -384,11 +384,13 @@ public final class Skript extends JavaPlugin implements Listener {
 
 		// Start the updater
 		// Note: if config prohibits update checks, it will NOT do network connections
+		/*
 		try {
 			this.updater = new SkriptUpdater();
 		} catch (Exception e) {
 			Skript.exception(e, "Update checker could not be initialized.");
 		}
+		 */
 		experimentRegistry = new ExperimentRegistry(this);
 		Feature.registerAll(getAddonInstance(), experimentRegistry);
 
