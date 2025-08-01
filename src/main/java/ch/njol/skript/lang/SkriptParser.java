@@ -261,6 +261,10 @@ public class SkriptParser {
 								break;
 						}
 						log.printLog();
+						try {
+							getParser().getCurrentScript().addons.add(org.bukkit.plugin.java.JavaPlugin.getProvidingPlugin(element.getClass()).getName());
+						} catch (Exception ignored) {
+						}
 						if (doSimplification && element instanceof Simplifiable<?> simplifiable)
 							//noinspection unchecked
 							return (T) simplifiable.simplify();

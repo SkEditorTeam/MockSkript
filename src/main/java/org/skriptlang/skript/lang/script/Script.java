@@ -31,6 +31,8 @@ public final class Script implements Validated, AnyNamed {
 
 	private final List<Structure> structures;
 
+	public final Set<String> addons = new HashSet<>();
+
 	/**
 	 * Creates a new Script to be used across the API.
 	 * Only one Script should be created per Config. A loaded Script may be obtained through {@link ch.njol.skript.ScriptLoader}.
