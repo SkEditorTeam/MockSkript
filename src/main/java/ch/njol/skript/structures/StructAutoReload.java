@@ -116,6 +116,7 @@ public class StructAutoReload extends Structure {
 
 	@Override
 	public boolean postLoad() {
+		if (true) return true;
 		task = new Task(Skript.getInstance(), 0, 20 * 2, true) {
 			@Override
 			public void run() {
@@ -146,6 +147,7 @@ public class StructAutoReload extends Structure {
 
 	@Override
 	public void unload() {
+		if (task == null) return;
 		task.cancel();
 	}
 
